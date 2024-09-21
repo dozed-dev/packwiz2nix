@@ -12,7 +12,7 @@
   instanceCfg,
   ...
 } @ args:
-stdenvNoCC.mkDerivation (finalAttrs:
+  stdenvNoCC.mkDerivation (finalAttrs:
     {
       pname = src.pname or pname;
       version = src.version or version;
@@ -47,9 +47,9 @@ stdenvNoCC.mkDerivation (finalAttrs:
         ))
         + ''
 				  cd "$tmp"
-          zip -r $out/${finalAttrs.pname}-${finalAttrs.version}.zip {*,.*}
+          zip -r "$out/${finalAttrs.pname}-${finalAttrs.version}.zip" * .*
 
-          ${lib.getExe strip-nondeterminism} $out/${finalAttrs.pname}-${finalAttrs.version}.zip
+          ${lib.getExe strip-nondeterminism} "$out/${finalAttrs.pname}-${finalAttrs.version}.zip"
         '';
     }
     // args)
